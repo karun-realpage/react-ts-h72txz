@@ -10,9 +10,6 @@ export default function Login() {
     upassword: '',
     isloggedin: false,
   });
-  //the useRef Hook allows you to persist data between renders
-  const prevCountRef = React.useRef();
-
   const handlename = (event: any) => {
     SetDetails((prevData) => ({ ...prevData, uname: event.target.value }));
   };
@@ -36,10 +33,6 @@ export default function Login() {
     }
   };
   return (
-    <div>
-      {Details.isloggedin ? (
-        <Greet />
-      ) : (
         <div className="container">
           <div className="m-5 d-flex justify-content-center ms-3">
             <form className="card" onSubmit={() => handleSubmit()}>
@@ -69,8 +62,6 @@ export default function Login() {
               </div>
             </form>
           </div>
-        </div>
-      )}
-    </div>
+
   );
 }
