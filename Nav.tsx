@@ -4,7 +4,7 @@ function Nav() {
   return (
     <nav className="navbar navbar-expand-md bg-body-tertiary">
       <div className="container-fluid">
-        <a className="navbar-brand" href="#">
+        <a className="navbar-brand p-1" href="#">
           {user}
         </a>
         <button
