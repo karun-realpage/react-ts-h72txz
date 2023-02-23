@@ -1,17 +1,19 @@
 import * as React from 'react';
 import { useForm } from 'react-hook-form';
-import Data from './Data.json';
+import Data from './data.json';
+import Greet from './Greet';
 export default function Login() {
   let count = 0;
   const k = Data as any;
   const [Details, SetDetails] = React.useState({
     uname: '',
     upassword: '',
+    isloggedin: false,
   });
   //the useRef Hook allows you to persist data between renders
   const prevCountRef = React.useRef();
 
-  const handlemail = (event: any) => {
+  const handlename = (event: any) => {
     SetDetails((prevData) => ({ ...prevData, uname: event.target.value }));
   };
   const handlepassword = (event: any) => {
@@ -34,38 +36,41 @@ export default function Login() {
     }
   };
   return (
-    <div className="container">
-      <h1 className="mt-3 ms-3"> Login:</h1>
-      <div className="d-flex justify-content-center ms-3 border">
-        <form onSubmit={() => handleSubmit(event)}>
-          <div className="m-3">
-            <label className="form-label p-1">User Name</label>
-            <input
-              type="text"
-              className="form-control"
-              placeholder="User Name"
-              onChange={() => handlemail(event)}
-            />
-            <div id="emailHelp" className="form-text">
-              We'll never share your email with anyone else.
-            </div>
+    <div>
+      {Details.isloggedin ? (
+        <Greet />
+      ) : (
+        <div className="container">
+          <div className="m-5 d-flex justify-content-center ms-3">
+            <form className="card" onSubmit={() => handleSubmit()}>
+              <div className="m-3">
+                <h1> Login:</h1>
+                <label className="form-label p-1">User Name</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="User Name"
+                  onChange={() => handlename(event)}
+                />
+              </div>
+              <div className="m-3">
+                <label className="form-label p-1">Password</label>
+                <input
+                  type="password"
+                  className="form-control"
+                  placeholder="Password"
+                  onChange={() => handlepassword(event)}
+                />
+              </div>
+              <div className="text-center justify-content-center mb-3">
+                <button type="submit" className="btn btn-primary">
+                  Submit
+                </button>
+              </div>
+            </form>
           </div>
-          <div className="m-3">
-            <label className="form-label p-1">Password</label>
-            <input
-              type="password"
-              className="form-control"
-              placeholder="Password"
-              onChange={() => handlepassword(event)}
-            />
-          </div>
-          <div className="text-center justify-content-center mb-3">
-            <button type="submit" className="btn btn-primary">
-              Submit
-            </button>
-          </div>
-        </form>
-      </div>
+        </div>
+      )}
     </div>
   );
 }
